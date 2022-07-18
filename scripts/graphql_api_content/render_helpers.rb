@@ -34,9 +34,11 @@ module RenderHelpers
                         #{render_of_type(field["type"])}
                         #{field["isDeprecated"] ? '<span class="pill pill--deprecated"><code>deprecated</code></span>' : ""}
                       </h3>
-                      #{field["deprecationReason"] && "<p><em>Deprecated: #{field["deprecationReason"]}</em></p>"}
-                      #{field["description"] && "<p>#{field["description"]}</p>"}
-                      #{render_field_args(field["args"])}
+                      <section>
+                        #{field["deprecationReason"] && "<p><em>Deprecated: #{field["deprecationReason"]}</em></p>"}
+                        #{field["description"] && "<p>#{field["description"]}</p>"}
+                        #{render_field_args(field["args"])}
+                      </section>
                     </td>
                   </tr>
                 HTML
@@ -189,6 +191,8 @@ module RenderHelpers
     enum_values = render_enum_values(schema_type_data["enumValues"])
 
     <<~HTML
+      <!-- vale off -->
+      <!--alex ignore-->
       <h1 class="has-pills">
         <code>#{name}</code>
         #{render_pill(schema_type_data["kind"], "large")}
